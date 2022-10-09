@@ -6,6 +6,7 @@ class Publication < ApplicationRecord
     validates :title, presence: true
     validates :description, presence: true
     validates :route, presence: true
+    validates :price, presence: true
 
     accepts_nested_attributes_for :labels,
     reject_if: proc { |attr| attr['contact'].blank? },
@@ -15,5 +16,6 @@ class Publication < ApplicationRecord
         title
         description
         route
+        price
     end
 end

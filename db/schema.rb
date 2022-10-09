@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_05_153558) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_09_035741) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_153558) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "dogs", force: :cascade do |t|
+    t.string "nombre"
+    t.text "raza"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "labels", force: :cascade do |t|
     t.string "contact"
     t.bigint "publication_id", null: false
@@ -50,15 +57,54 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_153558) do
     t.index ["publication_id"], name: "index_labels_on_publication_id"
   end
 
+  create_table "notices", force: :cascade do |t|
+    t.string "encabezado"
+    t.text "cuerpo"
+    t.string "link"
+    t.integer "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "painters", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "title"
+    t.integer "price"
+    t.bigint "painter_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["painter_id"], name: "index_pictures_on_painter_id"
+  end
+
   create_table "publications", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.string "route"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "role", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "labels", "publications"
+  add_foreign_key "pictures", "painters"
 end
