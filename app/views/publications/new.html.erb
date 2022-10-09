@@ -1,0 +1,10 @@
+<div class="container border border-info">  
+  <h1>Nueva Publicación</h1>
+
+  <%= render "form", publication: @publication %>
+  <br>
+
+  <div>
+    <%= link_to "Volver a Publicación", publications_path , class:'bi bi-house-door btn btn-outline-primary'%>
+  </div>
+</div>

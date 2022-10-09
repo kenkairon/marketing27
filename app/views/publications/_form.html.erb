@@ -1,0 +1,56 @@
+<%= form_with(model: publication) do |form| %>
+  <% if publication.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
+
+      <ul>
+        <% publication.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="container">
+  <div class="row alert alert-secondary">
+    <div class="col-4">
+      <%= form.label :Título, style: "display: block" %>
+      <%= form.text_field :title , class:'form-control' %>
+    </div>
+
+    <div class="col-4">
+      <%= form.label :Descripción, style: "display: block" %>
+      <%= form.text_area :description, class:'form-control'%>
+    </div>
+
+    <div class="col-4">
+      <%= form.label :Redes_Sociales, style: "display: block" %>
+      <%= form.text_field :route, class:'form-control'%>
+    </div>
+
+    <div class="col-4">
+      <%= form.label :Foto, style: "display: block" %>
+      <%= form.file_field :photo, class:'form-control'%>
+    </div>
+
+    <div  class="col-4 ">
+      
+      <h2>Ingrese la Etiqueta</h2>
+
+      <%= form.fields_for :labels do | etiqueta | %>
+        <div class="labels_fields">
+          <div class="fields">
+            <%= etiqueta.label :contact, "Etiqueta" %><br>
+            <%= etiqueta.text_field :contact %>
+            <%= etiqueta.check_box :_destroy %>
+            <%= etiqueta.label :_destroy, "Borrar",data: { confirm: 'Are you sure?' } %>
+          </div>
+        </div>
+       <% end %>
+    </div>
+    <div class="col-6">
+       <br>
+      <%= form.submit  class:'bi bi-pencil-square btn btn-primary'%>
+    </div>
+  </div>
+</div>
+<% end %>

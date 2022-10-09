@@ -1,0 +1,27 @@
+<div class="container alert alert-info col-8">
+  <p class="lead" style="color: green"><em><strong><%= notice %></strong></em></p>
+  <%= image_tag @publication.photo,class:'img-fluid rounded-start',width:200  if @publication.photo.attached? %>
+  <%= render @publication %>
+  <h2>Etiquetas</h2>
+
+  <% if @publication.labels.any? %>
+    <ul>
+      <% @publication.labels.each do |etiquetas| %>
+        <li><%= link_to etiquetas, etiquetas %></li>
+      <% end %>
+    </ul>
+    <% else %>
+    <p>no hay etiquetas</p>
+  <% end %>
+  <div class="row container-fluid alert alert-warning">
+    <div class=col-4>
+      <%= link_to "Editar Publicación", edit_publication_path(@publication), class:'bi bi-pencil-square btn btn-info'%> 
+    </div>
+    <div class=col-4>
+      <%= link_to "Volver a Publicación", publications_path, class:'bi bi-house-door btn btn-primary'%>
+    </div>
+    <div class=col-4>
+      <%= button_to "Eliminar Publicación", @publication, method: :delete, class:'bi bi-trash3-fill btn btn-danger',data: { confirm: 'Are you sure?' }%>
+    </div>    
+  </div>
+</div>
