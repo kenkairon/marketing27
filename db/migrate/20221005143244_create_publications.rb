@@ -4,7 +4,7 @@ class CreatePublications < ActiveRecord::Migration[7.0]
       t.string :title
       t.text :description
       t.string :route
-
+      
       t.timestamps
     end
   end

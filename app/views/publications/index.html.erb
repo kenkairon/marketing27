@@ -5,15 +5,27 @@
       <h1>Publicaciones</h1>
     <%= paginate @publications %>
     <% @publications.each do |publication| %>
-      <div class="card text-dark bg-light mb-3 border border-info " style="max-width: 540px;">
+      <div class="container-fluid card text-dark bg-light mb-3 border border-info " style="max-width: 540px;">
           <div class="row g-0">
-            <div class="col-md-4">
-                <%= image_tag publication.photo, width:200,class:'img-fluid rounded-start' if publication.photo.attached? %>
+            <div class="col-md-5">
+                <p class="card-text"><small class="text-muted"><%= link_to " Mostrar Publicación", publication, class:'bi bi-eye-fill btn btn-primary' %></small></p>
+                <%= image_tag publication.photo, width:200,class:'img-fluid rounded' if publication.photo.attached? %>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
               <div class="card-body">
                 <p class="card-text"><%= render publication %></p>
-                <p class="card-text"><small class="text-muted"><%= link_to " Mostrar Publicación", publication, class:'bi bi-eye-fill btn btn-primary' %></small></p>
+                <p class="card-text">
+                  <p>Etiquetas</p>
+                  <% if publication.labels.any? %>
+                    <ul>
+                      <% publication.labels.each do |etiquetas| %>
+                        <li><%= link_to etiquetas, etiquetas %></li>
+                      <% end %>
+                    </ul>
+                    <% else %>
+                    <p>no hay etiquetas</p>
+                  <% end %>
+                </p>
               </div>
             </div>
           </div>

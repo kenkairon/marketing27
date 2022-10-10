@@ -5,8 +5,12 @@
 
     <br>
 
-    <div class="col-6">
-        <%= link_to " Mostrar Publicación", @publication , class:'bi bi-eye-fill btn btn-outline-info' %> |
+    <div class="row">
+      <div class="col-xl-3">
+        <%= link_to " Mostrar Publicación", @publication , class:'bi bi-eye-fill btn btn-outline-info' %> 
+      </div>
+      <div class="col-xl-3">
         <%= link_to "Volver a Publicación", publications_path, class:'bi bi-house-door btn btn-outline-primary'%>
+      </div>
     </div>
 </div>
